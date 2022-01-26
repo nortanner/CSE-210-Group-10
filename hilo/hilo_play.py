@@ -29,7 +29,7 @@ class Director:
         if self.total_score <= 0:
             self.is_playing = False
         else:
-            draw_again = input("Draw again? [y/n] ")
+            draw_again = input("Draw card? [y/n] ").lower()
             self.is_playing = (draw_again == "y")
 
         

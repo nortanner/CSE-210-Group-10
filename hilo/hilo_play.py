@@ -12,12 +12,15 @@ class Director:
         self.score = 0
         self.total_score = 300
 
-        for i in range(2):
-            card = Card()
-            self.cards.append(card)
 
 
     def start_game(self):
+
+        for i in range(1):
+            card = Card()
+            self.cards.append(card)
+            value = card.value
+            self.cards_value.append(int(value))
 
         self.get_inputs()
         while self.is_playing:
@@ -39,7 +42,7 @@ class Director:
         if not self.is_playing:
             return 
         
-        for i in range(len(self.cards)):
+        for i in range(1):
             card = self.cards[i]
             card.draw()
             value = card.value

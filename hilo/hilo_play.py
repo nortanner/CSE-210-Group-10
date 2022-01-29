@@ -22,8 +22,8 @@ class Director:
             value = card.value
             self.cards_value.append(int(value))
 
-        self.get_inputs()
         while self.is_playing:
+            self.get_inputs()
             self.do_updates()
             self.do_outputs()
 
@@ -48,11 +48,9 @@ class Director:
             value = card.value
             self.cards_value.append(int(value))
 
-        print(f'first card is {self.cards_value[-2]}')
-
-        guess = input('Higher or lower? (h/l): ')
         card_1 = self.cards_value[-2]
         card_2 = self.cards_value[-1]
+        guess = input(f'Higher or lower than {card_1}? (h/l): ')
         
         if (card_1) > (card_2) and guess == 'l' or (card_1) < (card_2) and guess == 'h':
             self.score = 100

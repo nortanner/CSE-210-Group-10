@@ -29,6 +29,7 @@ class Director:
         else:
             print("Game over! Thank you for playing")
             print(word)
+        #we still need to print the info on the terminal
 
     
     

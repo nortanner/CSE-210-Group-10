@@ -36,7 +36,7 @@ class Word:
 #
 #update_guess("tiller", "l")
 #
-words = ["reign", "absorbed", "savory", "mind", "property", "yawn", "yoke", "toe", "letters", "evanescent", "unequaled", "bashful", "truthful", "aftermath", "striped", "care", "cook", "summer", "wakeful", "little", "jail", "defective", "quilt", "jolly", "blushing"]
-word = random.choice(words)
+# words = ["reign", "absorbed", "savory", "mind", "property", "yawn", "yoke", "toe", "letters", "evanescent", "unequaled", "bashful", "truthful", "aftermath", "striped", "care", "cook", "summer", "wakeful", "little", "jail", "defective", "quilt", "jolly", "blushing"]
+# word = random.choice(words)
 
-print(word)
+# print(word)

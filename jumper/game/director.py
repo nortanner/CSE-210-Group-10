@@ -24,9 +24,11 @@ class Director:
     def start_game(self):
         word = self.word
         while self.num_guesses >=5:
-            guess = get_guess()
-            check_in_word(guess, word)
-        pass
+            guess = Director.get_guess()
+            Director.check_in_word(guess, word)
+        else:
+            print("Game over! Thank you for playing")
+            print(word)
 
     
     

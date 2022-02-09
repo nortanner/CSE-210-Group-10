@@ -4,7 +4,7 @@ class Word:
 
     def __init__(self):
         words = ["reign", "absorbed", "savory", "mind", "property", "yawn", "yoke", "toe", "letters", "evanescent", "unequaled", "bashful", "truthful", "aftermath", "striped", "care", "cook", "summer", "wakeful", "little", "jail", "defective", "quilt", "jolly", "blushing"]
-        self.word = words.choice()
+        self.word = random.choice(words)
         self.guess_word = ""
         for i in range(len(self.word)):
             self.guess_word += "_ "
@@ -36,3 +36,7 @@ class Word:
 #
 #update_guess("tiller", "l")
 #
+words = ["reign", "absorbed", "savory", "mind", "property", "yawn", "yoke", "toe", "letters", "evanescent", "unequaled", "bashful", "truthful", "aftermath", "striped", "care", "cook", "summer", "wakeful", "little", "jail", "defective", "quilt", "jolly", "blushing"]
+word = random.choice(words)
+
+print(word)

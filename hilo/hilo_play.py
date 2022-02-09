@@ -12,15 +12,18 @@ class Director:
         self.score = 0
         self.total_score = 300
 
-        for i in range(2):
-            card = Card()
-            self.cards.append(card)
 
 
     def start_game(self):
 
-        self.get_inputs()
+        for i in range(1):
+            card = Card()
+            self.cards.append(card)
+            value = card.value
+            self.cards_value.append(int(value))
+
         while self.is_playing:
+            self.get_inputs()
             self.do_updates()
             self.do_outputs()
 
@@ -39,17 +42,15 @@ class Director:
         if not self.is_playing:
             return 
         
-        for i in range(len(self.cards)):
+        for i in range(1):
             card = self.cards[i]
             card.draw()
             value = card.value
             self.cards_value.append(int(value))
 
-        print(f'first card is {self.cards_value[-2]}')
-
-        guess = input('Higher or lower? (h/l): ')
         card_1 = self.cards_value[-2]
         card_2 = self.cards_value[-1]
+        guess = input(f'Higher or lower than {card_1}? (h/l): ')
         
         if (card_1) > (card_2) and guess == 'l' or (card_1) < (card_2) and guess == 'h':
             self.score = 100

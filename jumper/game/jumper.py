@@ -13,7 +13,7 @@ class Jumper:
         # for i in self.jumper:
         #     print(i)
 
-jumper = Jumper()
+
 
 
 # for i in range(5):

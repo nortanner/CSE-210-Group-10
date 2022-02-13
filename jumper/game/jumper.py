@@ -8,6 +8,7 @@ class Jumper:
         #     print(i)
         if len(self.jumper) != 3:
             self.jumper.pop(0)
+            print(self.jumper)
         else:
             self.jumper[0] = "  X"
         # for i in self.jumper:

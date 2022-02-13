@@ -11,10 +11,11 @@ class Director:
         self.num_guesses = 0
         
     def check_in_word(self, guess, word):
-        if guess in word:
-            Word.update_guess(guess)
+        
+        if guess not in word.word:
+            self.jumper.update_drawing()
         else:
-            Jumper.update_drawing()
+            word.word.update_guess(guess)
 
     def get_guess(self):
         letter = input("Enter a letter (a-z): ")
@@ -23,12 +24,19 @@ class Director:
 
     def start_game(self):
         word = self.word
-        while self.num_guesses >=5:
-            guess = Director.get_guess()
-            Director.check_in_word(guess, word)
+        jumper = Jumper()
+        while self.num_guesses <=5:
+            print(jumper.__dict__)
+            for i in range(len(jumper.jumper)):
+                print(jumper.jumper[i])
+            print(*word.guess_word)
+            print()
+            guess = self.get_guess()
+            self.num_guesses += 1
+            self.check_in_word(guess, word)
         else:
-            print("Game over! Thank you for playing")
-            print(word)
+            print("Game over! Thank you for playing. \n")
+            print(*word.word)
         #we still need to print the info on the terminal
 
     

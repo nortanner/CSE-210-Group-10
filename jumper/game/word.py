@@ -4,10 +4,10 @@ class Word:
 
     def __init__(self):
         words = ["reign", "absorbed", "savory", "mind", "property", "yawn", "yoke", "toe", "letters", "evanescent", "unequaled", "bashful", "truthful", "aftermath", "striped", "care", "cook", "summer", "wakeful", "little", "jail", "defective", "quilt", "jolly", "blushing"]
-        self.word = random.choice(words)
-        self.guess_word = ""
-        for i in range(len(self.word)):
-            self.guess_word += "_ "
+        self.word = list(random.choice(words))
+        self.guess_word = []
+        for _ in range(len(self.word)):
+            self.guess_word.append("_ ")
     
     def get_word(self):
         return self.word
@@ -15,6 +15,7 @@ class Word:
     def update_guess(self, letter_guess):
         """This function will run if the letter guessed by the user is in the word."""
         word_editing = list(self.word)
+        print(word_editing)
         for i in range(len(word_editing)):
             if letter_guess != word_editing[i]:
                 word_editing[i] = "_ "

@@ -1,5 +1,4 @@
-import random
-from turtle import up
+impimport random
 
 
 class Word:

@@ -1,5 +1,8 @@
 
 class Guesser:
-    def __init__(self, guess):
-        self.guess = guess
-        return self.guess
+    def __init__(self):
+        self.guess = self.letter()
+
+    def letter(letter):
+        guess = letter
+        return guess

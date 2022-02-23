@@ -10,7 +10,7 @@ class Director:
         self.jumper = Jumper()
         self.num_right_guesses = 0
         self.num_wrong_guesses = 0
-        self.update = list(self.word.guess_word)
+        self.update = list(self.word.guess_word) #what is this?
 
     def check_in_word(self, guess, word, jumper):
         if guess in word:

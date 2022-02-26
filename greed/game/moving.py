@@ -1,5 +1,5 @@
-from game.shared.color import Color
-from game.shared.point import Point
+from game.color import Color
+from game.point import Point
 
 
 class Moving:

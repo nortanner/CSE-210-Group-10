@@ -1,5 +1,5 @@
 from game.color import Color
-from game.point import Point
+from game.points import Points
 
 
 class Moving:

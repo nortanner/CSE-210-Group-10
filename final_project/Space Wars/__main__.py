@@ -45,13 +45,11 @@ def main():
     
     # create the artifacts
 
-    for n in range(DEFAULT_ARTIFACTS):
-        text = chr(random.choice([79]))
+    for n in ENEMY_LOCATIONS_LVL1:
+        text = "O"
 
 
-        x = random.randint(15, COLS - 1)
-        y = random.randint(15, ROWS - 351)
-        position = Point(x, y)
+        position = n
         position = position.scale(CELL_SIZE)
         velocity = Point(0, 1)
 

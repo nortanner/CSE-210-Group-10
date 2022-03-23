@@ -26,8 +26,7 @@ class Actor:
         self._velocity = Point(0, 0)
         self._width = width
         self._height = height
-        self._collision = pyray.Rectangle(0, 0,
-        width, height)
+        self._collision = pyray.Rectangle(0, 0, width, height)
 
     def get_color(self):
         """Gets the actor's color as a tuple of three ints (r, g, b).

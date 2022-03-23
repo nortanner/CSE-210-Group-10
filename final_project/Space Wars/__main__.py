@@ -55,7 +55,7 @@ def main():
         #position = position.scale(CELL_SIZE)
         #velocity = Point(0, 1)
         x -= (MAX_X // DEFAULT_ARTIFACTS)
-        text = chr(random.choice([79]))
+        text = "O"
 
         position = Point(x, y)
 

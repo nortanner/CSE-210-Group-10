@@ -14,4 +14,5 @@ DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
 RED = Color(255, 50, 50)
 DEFAULT_ARTIFACTS = 10
+ENEMY_LOCATIONS_LVL1 = [Point(int(MAX_X/4), 100), Point(int(MAX_X/4*2), 100), Point(int(MAX_X/4*3), 100)]
 

@@ -49,13 +49,14 @@ def main():
     y = random.randint(15, ROWS - 351)
     velocity = Point(0, 1)
     for n in range(DEFAULT_ARTIFACTS):
-        
+        #text = "O"
+        #position = n
+        #position = position.scale(CELL_SIZE)
+        #velocity = Point(0, 1)
         x -= (MAX_X // DEFAULT_ARTIFACTS)
         text = chr(random.choice([79]))
 
-
         position = Point(x, y)
-
 
 
         r = random.randint(0, 255)

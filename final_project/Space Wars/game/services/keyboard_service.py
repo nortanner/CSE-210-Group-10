@@ -30,10 +30,10 @@ class KeyboardService:
         dy = 0
 
         if pyray.is_key_down(pyray.KEY_LEFT):
-            dx = -5
+            dx = -15
         
         if pyray.is_key_down(pyray.KEY_RIGHT):
-            dx = 5
+            dx = 15
         
         
 

@@ -43,6 +43,17 @@ class Point:
         """
         return self._x == other.get_x() and self._y == other.get_y()
 
+    def close_enough(self, other):
+        """Whether or not this Point is close to the given one.
+
+        Args:
+            other (Point): The Point to compare.
+
+        Returns: 
+            boolean: True if both x and y are within 10; false if otherwise.
+        """
+        return self._x >= other.get_x() - 1 and self._x <= other.get_x() + 20 and self._y >= other.get_y() - 10 and self._y <= other.get_y() + 20 
+
     def get_x(self):
         """Gets the horizontal distance.
         

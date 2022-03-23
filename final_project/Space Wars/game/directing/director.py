@@ -25,6 +25,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self.add_velocity = 1
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -53,11 +54,10 @@ class Director:
 
             text = "|"
 
-            position = robot.get_position().add(Point(7, 0))
-            position = position.scale(CELL_SIZE)
-            velocity = Point(0, -1)
+            position = robot.get_position().add(Point(12, 0))
+            velocity = Point(0, -3)
 
-            color = WHITE
+            color = RED
         
             laser = Artifact(4, 23)
             laser.set_text(text)
@@ -66,9 +66,9 @@ class Director:
             laser.set_position(position)
             laser.set_velocity(velocity)
 
-            if len(cast.get_actors("lasers")) <= 2:
+            if len(cast.get_actors("lasers")) <= 25:
                 cast.add_actor("lasers", laser)
-                pass  
+                
 
 
 
@@ -91,18 +91,57 @@ class Director:
         
         for artifact in artifacts:
             artifact.move_next(max_x, max_y)
+
             for laser in lasers:
-                laser.move_next(max_x, max_y)
 
                 # print(artifact.get_collision())
-                if pyray.check_collision_recs(laser.get_collision(), artifact.get_collision()):
-                    
+                if laser.get_position().close_enough(artifact.get_position()):
+                    if laser in lasers:
+                        cast.remove_actor("lasers", laser)
+                    if artifact in artifacts:
+                        cast.remove_actor("artifacts", artifact)
+
+        for i in range(DEFAULT_ARTIFACTS):
+            for laser in lasers:
+                laser.move_next(max_x, max_y)
+        for laser in lasers:  
+            laser.set_velocity(Point(0, -3))
+            if laser._position.get_y() >= MAX_Y - 35:
+                if laser in lasers:
                     cast.remove_actor("lasers", laser)
-                    cast.remove_actor("artifacts", artifact)
+                
                 # if laser.get_position().get_y() <= 5:
                 #     print("true")
                 #     cast.remove_actor("lasers", laser)
-                pass
+        velocity = self._keyboard_service.get_direction()
+        
+        if len(artifacts) == 0:
+            self.add_velocity += 10
+            x = random.randint(15, COLS - 1)
+            y = random.randint(15, ROWS - 351)
+            velocity = Point(0, self.add_velocity)
+            for n in range(DEFAULT_ARTIFACTS):
+                
+                x -= (MAX_X // DEFAULT_ARTIFACTS)
+                text = '0'
+
+
+                position = Point(x, MAX_Y)
+
+
+                r = random.randint(0, 255)
+                g = random.randint(0, 255)
+                b = random.randint(0, 255)
+                color = Color(r, g, b)
+                
+                artifact = Artifact()
+                artifact.set_text(text)
+                artifact.set_font_size(FONT_SIZE)
+                artifact.set_color(color)
+                artifact.set_position(position)
+                artifact.set_velocity(velocity)
+
+                cast.add_actor("artifacts", artifact)  
    
         
     def _do_outputs(self, cast):

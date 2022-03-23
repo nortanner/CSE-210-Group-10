@@ -71,5 +71,5 @@ class Cast:
             group (string): The name of the group.
             actor (Actor): The actor to remove.
         """
-        if group in self._actors:
-            self._actors[group].remove(actor)
+        # if group in self._actors:
+        self._actors[group].remove(actor)

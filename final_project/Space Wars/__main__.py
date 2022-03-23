@@ -44,16 +44,17 @@ def main():
     cast.add_actor("robots", robot)
     
     # create the artifacts
-
+    x = random.randint(15, COLS - 1)
+    y = random.randint(15, ROWS - 351)
+    velocity = Point(0, 1)
     for n in range(DEFAULT_ARTIFACTS):
+        
+        x -= (MAX_X // DEFAULT_ARTIFACTS)
         text = chr(random.choice([79]))
 
 
-        x = random.randint(15, COLS - 1)
-        y = random.randint(15, ROWS - 351)
         position = Point(x, y)
-        position = position.scale(CELL_SIZE)
-        velocity = Point(0, 1)
+
 
         r = random.randint(0, 255)
         g = random.randint(0, 255)

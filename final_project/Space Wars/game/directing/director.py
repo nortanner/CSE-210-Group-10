@@ -116,14 +116,14 @@ class Director:
         velocity = self._keyboard_service.get_direction()
         
         if len(artifacts) == 0:
-            self.add_velocity += 10
+            self.add_velocity += 2
             x = random.randint(15, COLS - 1)
             y = random.randint(15, ROWS - 351)
             velocity = Point(0, self.add_velocity)
             for n in range(DEFAULT_ARTIFACTS):
                 
                 x -= (MAX_X // DEFAULT_ARTIFACTS)
-                text = '0'
+                text = 'O'
 
 
                 position = Point(x, MAX_Y)

@@ -44,7 +44,7 @@ def main():
     cast.add_actor("robots", robot)
     
     # create the artifacts
-<<<<<<< HEAD
+
     x = random.randint(15, COLS - 1)
     y = random.randint(15, ROWS - 351)
     velocity = Point(0, 1)
@@ -56,16 +56,7 @@ def main():
 
         position = Point(x, y)
 
-=======
 
-    for n in ENEMY_LOCATIONS_LVL1:
-        text = "O"
-
-
-        position = n
-        position = position.scale(CELL_SIZE)
-        velocity = Point(0, 1)
->>>>>>> ce076338b27d3e27aa6f39ad3804db0028fe716e
 
         r = random.randint(0, 255)
         g = random.randint(0, 255)

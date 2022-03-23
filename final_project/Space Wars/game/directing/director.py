@@ -55,7 +55,7 @@ class Director:
 
             text = "|"
 
-            position = robot.get_position().add(Point(12, 0))
+            position = robot.get_position().add(Point(8, 0))
             velocity = Point(0, -3)
 
             color = RED

@@ -44,11 +44,11 @@ class KeyboardService:
 
     def shoot_weapon(self):
 
-        if pyray.is_key_down(pyray.KEY_UP):
+        if pyray.is_key_down(pyray.KEY_SPACE):
             
             return True
 
     def key_released(self):
-         if pyray.is_key_up(pyray.KEY_UP):
+         if pyray.is_key_up(pyray.KEY_SPACE):
             
             return True       

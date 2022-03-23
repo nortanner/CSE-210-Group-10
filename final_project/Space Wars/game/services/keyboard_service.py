@@ -47,3 +47,8 @@ class KeyboardService:
         if pyray.is_key_down(pyray.KEY_UP):
             
             return True
+
+    def key_released(self):
+         if pyray.is_key_up(pyray.KEY_UP):
+            
+            return True       

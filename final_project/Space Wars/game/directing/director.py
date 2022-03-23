@@ -26,6 +26,7 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         self.add_velocity = 1
+        self.reset = True
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -50,7 +51,7 @@ class Director:
         velocity = self._keyboard_service.get_direction()
         robot.set_velocity(velocity) 
 
-        if self._keyboard_service.shoot_weapon():
+        if self._keyboard_service.shoot_weapon() and self.reset == True:
 
             text = "|"
 
@@ -68,6 +69,11 @@ class Director:
 
             if len(cast.get_actors("lasers")) <= 25:
                 cast.add_actor("lasers", laser)
+
+            self.reset = False
+
+        if self._keyboard_service.key_released():
+            self.reset = True
                 
 
 

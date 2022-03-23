@@ -4,6 +4,7 @@ import random
 from game.casting.actor import Actor
 from game.casting.artifact import Artifact
 from game.casting.cast import Cast
+from game.casting.score import Score
 
 from game.directing.director import Director
 
@@ -24,7 +25,7 @@ def main():
     cast = Cast()
     
     # create the banner
-    banner = Actor()
+    banner = Score()
     banner.set_text("SCORE: 0")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)

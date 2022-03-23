@@ -74,7 +74,6 @@ class Director:
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
-        
         Args:
             cast (Cast): The cast of actors.
         """
@@ -83,11 +82,9 @@ class Director:
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
 
-        banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        
         
         for artifact in artifacts:
             artifact.move_next(max_x, max_y)
@@ -100,7 +97,8 @@ class Director:
                         cast.remove_actor("lasers", laser)
                     if artifact in artifacts:
                         cast.remove_actor("artifacts", artifact)
-
+                    banner.update_points(10) #include if statement where points when object is hit, varies with level
+                    
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
                 laser.move_next(max_x, max_y)

@@ -95,7 +95,7 @@ class Director:
             for laser in lasers:
 
                 # print(artifact.get_collision())
-                if laser.get_position().close_enough(artifact.get_position()):
+                if pyray.check_collision_recs(artifact.get_collision(), laser.get_collision()):
                     if laser in lasers:
                         cast.remove_actor("lasers", laser)
                     if artifact in artifacts:

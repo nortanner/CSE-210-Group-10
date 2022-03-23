@@ -51,7 +51,7 @@ def main():
     for n in range(DEFAULT_ARTIFACTS):
         
         x -= (MAX_X // DEFAULT_ARTIFACTS)
-        text = chr(random.choice([79]))
+        text = "O"
 
 
         position = Point(x, y)

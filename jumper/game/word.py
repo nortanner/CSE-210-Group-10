@@ -1,4 +1,4 @@
-impimport random
+import random
 
 
 class Word:

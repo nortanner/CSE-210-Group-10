@@ -1,5 +1,5 @@
-from game.shared.color import Color
-from game.shared.point import Point
+from game.color import Color
+from game.points import Points
 
 
 class Moving:
@@ -21,8 +21,8 @@ class Moving:
         self._text = ""
         self._font_size = 15
         self._color = Color(255, 255, 255)
-        self._position = Point(0, 0)
-        self._velocity = Point(0, 0)
+        self._position = Points(0, 0)
+        self._velocity = Points(0, 0)
 
     def get_color(self):
         """Gets the Moving's color as a tuple of three ints (r, g, b).
@@ -74,7 +74,7 @@ class Moving:
         """
         x = (self._position.get_x() + self._velocity.get_x()) % max_x
         y = (self._position.get_y() + self._velocity.get_y()) % max_y
-        self._position = Point(x, y)
+        self._position = Points(x, y)
 
     def set_color(self, color):
         """Updates the color to the given one.

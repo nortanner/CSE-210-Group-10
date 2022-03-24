@@ -83,7 +83,7 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        banner = cast.get_first_actor("banners")
+        score = cast.get_first_actor("score")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
@@ -103,7 +103,7 @@ class Director:
                         cast.remove_actor("lasers", laser)
                     if artifact in artifacts:
                         cast.remove_actor("artifacts", artifact)
-                    banner.update_points(10) #include if statement where points when object is hit, varies with level
+                        score.update_points(10) #include if statement where points when object is hit, varies with level
                     
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:

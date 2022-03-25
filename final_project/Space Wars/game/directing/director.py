@@ -84,6 +84,7 @@ class Director:
             cast (Cast): The cast of actors.
         """
         score = cast.get_first_actor("score")
+        lives = cast.get_first_actor("life")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
@@ -104,7 +105,11 @@ class Director:
                     if artifact in artifacts:
                         cast.remove_actor("artifacts", artifact)
                         score.update_points(10) #include if statement where points when object is hit, varies with level
-                    
+
+        for artifact in artifacts:
+            if artifact._position.get_y() <= MAX_Y and artifact._position.get_y() >= MAX_Y - 35:
+                cast.remove_actor("artifacts", artifact)
+                lives.update_lives()
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
                 laser.move_next(max_x, max_y)

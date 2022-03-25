@@ -9,4 +9,4 @@ class Lives(Actor):
 
     def update_lives(self):
         self._lives -= 1
-        self.set_text(f"Score: {self._lives}")
+        self.set_text(f"LIVES: {self._lives}")

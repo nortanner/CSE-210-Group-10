@@ -35,10 +35,10 @@ def main():
 
     # create the lives banner
     lives_banner = Lives()
-    lives_banner.set_text("SCORE: 0")
+    lives_banner.set_text(f"LIVES: 5")
     lives_banner.set_font_size(FONT_SIZE)
     lives_banner.set_color(WHITE)
-    lives_banner.set_position(Point(500, 0))
+    lives_banner.set_position(Point(400, 0))
     cast.add_actor("life", lives_banner)
     
     # create the robot

@@ -84,7 +84,7 @@ class Actor:
             max_x (int): The maximum x value.
             max_y (int): The maximum y value.
         """
-        x = (self._position.get_x() + self._velocity.get_x()) % (max_x - 16)
+        x = (self._position.get_x() + self._velocity.get_x()) % (max_x - 8)
         y = (self._position.get_y() + self._velocity.get_y()) % (max_y - 16)
         self._position = Point(x, y)
         self._collision = pyray.Rectangle(x, y, self._width, self._height)

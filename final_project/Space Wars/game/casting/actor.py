@@ -76,7 +76,7 @@ class Actor:
         """
         return self._velocity
     
-    def move_next(self, max_x, max_y):
+    def move_next(self, max_x, max_y, x_boundary=16):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
         
@@ -84,7 +84,7 @@ class Actor:
             max_x (int): The maximum x value.
             max_y (int): The maximum y value.
         """
-        x = (self._position.get_x() + self._velocity.get_x()) % (max_x - 8)
+        x = (self._position.get_x() + self._velocity.get_x()) % (max_x - x_boundary)
         y = (self._position.get_y() + self._velocity.get_y()) % (max_y - 16)
         self._position = Point(x, y)
         self._collision = pyray.Rectangle(x, y, self._width, self._height)

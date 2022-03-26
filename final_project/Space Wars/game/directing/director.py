@@ -107,7 +107,7 @@ class Director:
                     
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
-                laser.move_next(max_x, max_y)
+                laser.move_next(max_x, max_y, 8)
         for laser in lasers:  
             laser.set_velocity(Point(0, -3))
             if laser._position.get_y() >= MAX_Y - 35:

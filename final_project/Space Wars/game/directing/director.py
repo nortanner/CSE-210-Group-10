@@ -27,7 +27,7 @@ class Director:
         self._video_service = video_service
         self.add_velocity = 1
         self.reset = True
-        
+        self.level = 0
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
 
@@ -83,7 +83,8 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        banner = cast.get_first_actor("banners")
+        score = cast.get_first_actor("score")
+        lives = cast.get_first_actor("life")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
@@ -103,8 +104,12 @@ class Director:
                         cast.remove_actor("lasers", laser)
                     if artifact in artifacts:
                         cast.remove_actor("artifacts", artifact)
-                    banner.update_points(10) #include if statement where points when object is hit, varies with level
-                    
+                        score.update_points(10) #include if statement where points when object is hit, varies with level
+
+        for artifact in artifacts:
+            if artifact._position.get_y() <= MAX_Y and artifact._position.get_y() >= MAX_Y - 35:
+                cast.remove_actor("artifacts", artifact)
+                lives.update_lives()
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
                 laser.move_next(max_x, max_y, 8)
@@ -120,17 +125,16 @@ class Director:
         velocity = self._keyboard_service.get_direction()
         
         if len(artifacts) == 0:
-            self.add_velocity += 2
-            x = random.randint(15, COLS - 1)
-            y = random.randint(15, ROWS - 351)
-            velocity = Point(0, self.add_velocity)
-            for n in range(DEFAULT_ARTIFACTS):
+            if self.level % 2 == 0:
+                self.level += 1
+                x = random.randint(15, COLS - 1)
+                y = random.randint(15, ROWS - 351)
                 
                 x -= (MAX_X // DEFAULT_ARTIFACTS)
-                text = 'O'
+                text = (f'O Level {self.add_velocity + 1}' )
 
 
-                position = Point(x, MAX_Y)
+                position = Point(MAX_X // 2, MAX_Y // 2)
 
 
                 r = random.randint(0, 255)
@@ -143,9 +147,36 @@ class Director:
                 artifact.set_font_size(FONT_SIZE)
                 artifact.set_color(color)
                 artifact.set_position(position)
-                artifact.set_velocity(velocity)
+                artifact.set_velocity(Point(0, 0))
 
-                cast.add_actor("artifacts", artifact)  
+                cast.add_actor("artifacts", artifact)
+            elif self.level % 2 == 1:
+                self.add_velocity += 1
+                self.level += 1
+                x = random.randint(15, COLS - 1)
+                for n in range(DEFAULT_ARTIFACTS):
+                    
+                    x -= (MAX_X // DEFAULT_ARTIFACTS)
+                    text = 'O'
+
+
+                    velocity = Point(0, self.add_velocity)
+                    position = Point(x, MAX_Y)
+
+
+                    r = random.randint(0, 255)
+                    g = random.randint(0, 255)
+                    b = random.randint(0, 255)
+                    color = Color(r, g, b)
+                    
+                    artifact = Artifact()
+                    artifact.set_text(text)
+                    artifact.set_font_size(FONT_SIZE)
+                    artifact.set_color(color)
+                    artifact.set_position(position)
+                    artifact.set_velocity(velocity)
+
+                    cast.add_actor("artifacts", artifact)  
    
         
     def _do_outputs(self, cast):

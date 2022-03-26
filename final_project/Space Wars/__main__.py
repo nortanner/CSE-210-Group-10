@@ -5,6 +5,7 @@ from game.casting.actor import Actor
 from game.casting.artifact import Artifact
 from game.casting.cast import Cast
 from game.casting.score import Score
+from game.casting.lives import Lives
 
 from game.directing.director import Director
 
@@ -24,13 +25,21 @@ def main():
     # create the cast
     cast = Cast()
     
-    # create the banner
-    banner = Score()
-    banner.set_text("SCORE: 0")
-    banner.set_font_size(FONT_SIZE)
-    banner.set_color(WHITE)
-    banner.set_position(Point(CELL_SIZE * 30, 0))
-    cast.add_actor("banners", banner)
+    # create the score banner
+    score_banner = Score()
+    score_banner.set_text("SCORE: 0")
+    score_banner.set_font_size(FONT_SIZE)
+    score_banner.set_color(WHITE)
+    score_banner.set_position(Point(CELL_SIZE * 30, 0))
+    cast.add_actor("score", score_banner)
+
+    # create the lives banner
+    lives_banner = Lives()
+    lives_banner.set_text(f"LIVES: 5")
+    lives_banner.set_font_size(FONT_SIZE)
+    lives_banner.set_color(WHITE)
+    lives_banner.set_position(Point(400, 0))
+    cast.add_actor("life", lives_banner)
     
     # create the robot
     x = int(MAX_X / 2)

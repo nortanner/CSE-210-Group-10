@@ -11,3 +11,10 @@ class Lives(Actor):
         if self._lives > 0:
             self._lives -= 1
             self.set_text(f"LIVES: {self._lives}")
+
+    def get_lives(self):
+
+        return self._lives
+
+    def set_lives(self, lives):
+        self._lives = lives

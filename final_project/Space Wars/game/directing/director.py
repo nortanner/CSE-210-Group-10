@@ -1,8 +1,11 @@
+from dis import Instruction
+from os import remove
 import pyray
 import random
 from game.shared.point import Point
 from game.shared.color import Color
 from game.casting.artifact import Artifact
+from game.casting.banner import Banner
 
 from constants import *
 
@@ -28,6 +31,7 @@ class Director:
         self.add_velocity = 1
         self.reset = True
         self.level = 0
+        self.keep_playing = True
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
 
@@ -36,9 +40,12 @@ class Director:
         """
         self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._get_inputs(cast)
-            self._do_updates(cast)
+            while self.keep_playing == True:
+                self._get_inputs(cast)
+                self._do_updates(cast)
+                self._do_outputs(cast)
             self._do_outputs(cast)
+            
         self._video_service.close_window()
 
     def _get_inputs(self, cast):
@@ -85,6 +92,7 @@ class Director:
         """
         score = cast.get_first_actor("score")
         lives = cast.get_first_actor("life")
+        instructions = cast.get_first_actor("instructions")
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
@@ -93,45 +101,58 @@ class Director:
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
         
+        # removes the enemy and the laser when they collide
         for artifact in artifacts:
             artifact.move_next(max_x, max_y)
-
             for laser in lasers:
-
-                # print(artifact.get_collision())
                 if pyray.check_collision_recs(artifact.get_collision(), laser.get_collision()):
                     if laser in lasers:
                         cast.remove_actor("lasers", laser)
                     if artifact in artifacts:
                         cast.remove_actor("artifacts", artifact)
                         score.update_points(10) #include if statement where points when object is hit, varies with level
-
+        
+        # removes one life for each enemy that reaches the bottom
         for artifact in artifacts:
             if artifact._position.get_y() <= MAX_Y and artifact._position.get_y() >= MAX_Y - 35:
                 cast.remove_actor("artifacts", artifact)
                 lives.update_lives()
+
+        # stops game and prints game over banner when 0 lives are left
+        if lives._lives <= 0:
+            game_over_banner = Banner()
+            game_over_banner.set_text('GAME OVER')
+            game_over_banner.set_font_size(FONT_SIZE)
+            game_over_banner.set_color(WHITE)
+            game_over_banner.set_position(Point(max_x // 2 - 75, max_y // 2))
+            cast.add_actor("banner", game_over_banner)
+            self.keep_playing = False
+
+        # moves lasers
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
                 laser.move_next(max_x, max_y)
+
+        # Removes laser when it reaches the top of the screen  
         for laser in lasers:  
             laser.set_velocity(Point(0, -3))
             if laser._position.get_y() >= MAX_Y - 35:
                 if laser in lasers:
                     cast.remove_actor("lasers", laser)
                 
-                # if laser.get_position().get_y() <= 5:
-                #     print("true")
-                #     cast.remove_actor("lasers", laser)
-        velocity = self._keyboard_service.get_direction()
         
+        velocity = self._keyboard_service.get_direction()
+        if self.level > 1:
+            instructions.remove_text()
         if len(artifacts) == 0:
+            # prints level screen between levels
             if self.level % 2 == 0:
                 self.level += 1
                 x = random.randint(15, COLS - 1)
                 y = random.randint(15, ROWS - 351)
                 
                 x -= (MAX_X // DEFAULT_ARTIFACTS)
-                text = (f'O Level {self.add_velocity + 1}' )
+                text = (f'O Level {self.add_velocity}' )
 
 
                 position = Point(MAX_X // 2, MAX_Y // 2)
@@ -150,6 +171,8 @@ class Director:
                 artifact.set_velocity(Point(0, 0))
 
                 cast.add_actor("artifacts", artifact)
+            
+            # creates new faster enemys every level
             elif self.level % 2 == 1:
                 self.add_velocity += 1
                 self.level += 1

@@ -8,5 +8,6 @@ class Lives(Actor):
         self._lives = 5
 
     def update_lives(self):
-        self._lives -= 1
-        self.set_text(f"LIVES: {self._lives}")
+        if self._lives > 0:
+            self._lives -= 1
+            self.set_text(f"LIVES: {self._lives}")

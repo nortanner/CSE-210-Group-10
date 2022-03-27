@@ -43,7 +43,7 @@ def main():
     cast.add_actor("life", lives_banner)
 
     instructions = Banner()
-    instructions.set_text('press space to shoot. shoot enemy to begin')
+    instructions.set_text('Press space to shoot. Shoot enemy to begin')
     instructions.set_font_size(FONT_SIZE // 2)
     instructions.set_color(WHITE)
     instructions.set_position(Point(MAX_X // 2 - 150, MAX_Y // 2 - 50))

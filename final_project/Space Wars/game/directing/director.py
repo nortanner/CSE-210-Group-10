@@ -143,8 +143,12 @@ class Director:
                 
         
         velocity = self._keyboard_service.get_direction()
+
+        # Removes instruction banner when first level starts
         if self.level > 1:
             instructions.remove_text()
+
+            
         if len(artifacts) == 0:
             # prints level screen between levels
             if self.level % 2 == 0:

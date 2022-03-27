@@ -42,6 +42,7 @@ def main():
     lives_banner.set_position(Point(400, 0))
     cast.add_actor("life", lives_banner)
 
+    # instructions for start of game 
     instructions = Banner()
     instructions.set_text('Press space to shoot. Shoot enemy to begin')
     instructions.set_font_size(FONT_SIZE // 2)

@@ -159,9 +159,9 @@ class Director:
                 position = Point(MAX_X // 2, MAX_Y // 2)
 
 
-                r = random.randint(0, 255)
-                g = random.randint(0, 255)
-                b = random.randint(0, 255)
+                r = random.randint(25, 255)
+                g = random.randint(25, 255)
+                b = random.randint(25, 255)
                 color = Color(r, g, b)
                 
                 artifact = Artifact()
@@ -187,10 +187,9 @@ class Director:
                     velocity = Point(0, self.add_velocity)
                     position = Point(x, MAX_Y)
 
-
-                    r = random.randint(0, 255)
-                    g = random.randint(0, 255)
-                    b = random.randint(0, 255)
+                    r = random.randint(25, 255)
+                    g = random.randint(25, 255)
+                    b = random.randint(25, 255)
                     color = Color(r, g, b)
                     
                     artifact = Artifact()

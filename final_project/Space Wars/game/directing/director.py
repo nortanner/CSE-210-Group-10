@@ -28,7 +28,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
-        self.add_velocity = 1
+        self.difficulty = 1
         self.reset = True
         self.level = 0
         self.keep_playing = True
@@ -131,10 +131,10 @@ class Director:
         # moves lasers
         for i in range(DEFAULT_ARTIFACTS):
             for laser in lasers:
+
                 laser.move_next(max_x, max_y, 8)
-
-
         # Removes laser when it reaches the top of the screen  
+
         for laser in lasers:  
             laser.set_velocity(Point(0, -3))
             if laser._position.get_y() >= MAX_Y - 35:
@@ -157,7 +157,7 @@ class Director:
                 y = random.randint(15, ROWS - 351)
                 
                 x -= (MAX_X // DEFAULT_ARTIFACTS)
-                text = (f'O Level {self.add_velocity}' )
+                text = (f'O Level {self.difficulty}' )
 
 
                 position = Point(MAX_X // 2, MAX_Y // 2)
@@ -179,7 +179,7 @@ class Director:
             
             # creates new faster enemys every level
             elif self.level % 2 == 1:
-                self.add_velocity += 1
+                self.difficulty += 1
                 self.level += 1
                 x = random.randint(15, COLS - 1)
                 for n in range(DEFAULT_ARTIFACTS):
@@ -188,7 +188,7 @@ class Director:
                     text = 'O'
 
 
-                    velocity = Point(0, self.add_velocity)
+                    velocity = Point(0, self.difficulty)
                     position = Point(x, MAX_Y)
 
                     r = random.randint(25, 255)

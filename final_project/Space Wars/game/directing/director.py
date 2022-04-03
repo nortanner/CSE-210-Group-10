@@ -5,6 +5,7 @@ import random
 from game.shared.point import Point
 from game.shared.color import Color
 from game.casting.artifact import Artifact
+from game.casting.actor import Actor
 from game.casting.banner import Banner
 
 from constants import *
@@ -32,6 +33,7 @@ class Director:
         self.reset = True
         self.level = 0
         self.keep_playing = True
+
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
 
@@ -66,8 +68,8 @@ class Director:
             velocity = Point(0, -3)
 
             color = RED
-        
-            laser = Artifact(4, 23)
+
+            laser = Actor(4, 23)
             laser.set_text(text)
             laser.set_font_size(FONT_SIZE)
             laser.set_color(color)
@@ -96,6 +98,7 @@ class Director:
         robot = cast.get_first_actor("robots")
         artifacts = cast.get_actors("artifacts")
         lasers = cast.get_actors("lasers")
+        extras = cast.get_actors("extras")
 
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
@@ -149,7 +152,7 @@ class Director:
             instructions.remove_text()
 
             
-        if len(artifacts) == 0:
+        if len(artifacts) == 0:    
             # prints level screen between levels
             if self.level % 2 == 0:
                 self.level += 1
@@ -204,6 +207,40 @@ class Director:
                     artifact.set_velocity(velocity)
 
                     cast.add_actor("artifacts", artifact)  
+
+        chance = random.randint(0, 50)
+        if chance == 0:
+            x = random.randint(15, COLS-1)
+            position = Point(x, MAX_Y)
+            r = random.randint(25, 255)
+            g = random.randint(25, 255)
+            b = random.randint(25, 255)
+            color = Color(r, g, b)
+
+            extra = Actor()
+            extra.set_text(random.choice(["H", "*", "*"]))
+            extra.set_font_size(FONT_SIZE)
+            extra.set_color(color)
+            extra.set_position(position)
+            extra.set_velocity(Point(0, 2))
+
+            cast.add_actor("extras", extra) 
+
+        for extra in extras:
+            extra.move_next(max_x, max_y)
+            for laser in lasers:
+                if pyray.check_collision_recs(extra.get_collision(), laser.get_collision()):
+                        if laser in lasers:
+                            cast.remove_actor("lasers", laser)
+                        if extra in extras:
+                            cast.remove_actor("extras", extra)
+
+            if extra._position.get_y() <= MAX_Y and extra._position.get_y() >= MAX_Y - 35:
+                cast.remove_actor("extras", extra)
+                if extra.get_text() == "H":
+                    lives.update_lives("heart")
+                elif extra.get_text() == "*":
+                    score.update_points(5)            
    
         
     def _do_outputs(self, cast):

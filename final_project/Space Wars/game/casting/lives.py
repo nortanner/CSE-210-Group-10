@@ -7,10 +7,14 @@ class Lives(Actor):
         super().__init__()
         self._lives = 5
 
-    def update_lives(self):
+    def update_lives(self, type = "other"):
         if self._lives > 0:
-            self._lives -= 1
-            self.set_text(f"LIVES: {self._lives}")
+            if type == "heart":
+                self._lives += 1
+                self.set_text(f"LIVES: {self._lives}")
+            else:
+                self._lives -= 1
+                self.set_text(f"LIVES: {self._lives}")
 
     def get_lives(self):
 

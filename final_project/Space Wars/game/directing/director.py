@@ -207,24 +207,24 @@ class Director:
                     artifact.set_velocity(velocity)
 
                     cast.add_actor("artifacts", artifact)  
+        if len(artifacts) > 1:
+            chance = random.randint(0, 50)
+            if chance == 0:
+                x = random.randint(15, COLS-1)
+                position = Point(x, MAX_Y)
+                r = random.randint(25, 255)
+                g = random.randint(25, 255)
+                b = random.randint(25, 255)
+                color = Color(r, g, b)
 
-        chance = random.randint(0, 50)
-        if chance == 0:
-            x = random.randint(15, COLS-1)
-            position = Point(x, MAX_Y)
-            r = random.randint(25, 255)
-            g = random.randint(25, 255)
-            b = random.randint(25, 255)
-            color = Color(r, g, b)
+                extra = Actor()
+                extra.set_text(random.choice(["H", "*", "*"]))
+                extra.set_font_size(FONT_SIZE)
+                extra.set_color(color)
+                extra.set_position(position)
+                extra.set_velocity(Point(0, 2))
 
-            extra = Actor()
-            extra.set_text(random.choice(["H", "*", "*"]))
-            extra.set_font_size(FONT_SIZE)
-            extra.set_color(color)
-            extra.set_position(position)
-            extra.set_velocity(Point(0, 2))
-
-            cast.add_actor("extras", extra) 
+                cast.add_actor("extras", extra) 
 
         for extra in extras:
             extra.move_next(max_x, max_y)
@@ -241,7 +241,7 @@ class Director:
                     lives.update_lives("heart")
                 elif extra.get_text() == "*":
                     score.update_points(5)            
-   
+    
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

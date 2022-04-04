@@ -218,7 +218,7 @@ class Director:
             color = Color(r, g, b)
 
             extra = Actor()
-            extra.set_text(random.choice(["H", "*", "*"]))
+            extra.set_text(random.choice(["H", "*", "*", "*", "*"]))
             extra.set_font_size(FONT_SIZE)
             extra.set_color(color)
             extra.set_position(position)

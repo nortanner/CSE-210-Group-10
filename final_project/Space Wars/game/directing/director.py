@@ -188,7 +188,7 @@ class Director:
                     text = 'O'
 
 
-                    velocity = Point(0, self.difficulty)
+                    velocity = Point(0, random.randint(1,self.difficulty))
                     position = Point(x, MAX_Y)
 
                     r = random.randint(25, 255)

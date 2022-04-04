@@ -68,6 +68,5 @@ def main():
     director = Director(keyboard_service, video_service)
     director.start_game(cast)
 
-
 if __name__ == "__main__":
     main()
